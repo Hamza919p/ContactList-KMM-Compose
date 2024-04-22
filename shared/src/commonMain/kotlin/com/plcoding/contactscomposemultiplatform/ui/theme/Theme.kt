@@ -1,56 +1,34 @@
 package com.plcoding.contactscomposemultiplatform.ui.theme
 
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.Typography
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
-val DarkColorScheme = darkColorScheme(
-    primary = GreenPrimaryDark,
-    secondary = GreenSecondaryDark,
-    tertiary = GreenTertiaryDark,
-    onPrimary = OnGreenDark,
-    primaryContainer = GreenContainerDark,
-    onPrimaryContainer = OnGreenContainerDark,
-    onSecondary = OnGreenSecondaryDark,
-    secondaryContainer = GreenSecondaryContainerDark,
-    onSecondaryContainer = OnGreenSecondaryContainerDark,
-    onTertiary = OnGreenTertiaryDark,
-    onTertiaryContainer = OnGreenTertiaryContainerDark,
-    tertiaryContainer = GreenTertiaryContainerDark,
-    background = BackgroundDark,
-    onBackground = OnBackgroundDark,
-    surface = SurfaceDark,
-    onSurface = OnSurfaceDark,
-    surfaceVariant = SurfaceVariantDark,
-    onSurfaceVariant = OnSurfaceVariantDark,
-    error = ErrorDark,
-    onError = OnErrorDark,
-    errorContainer = ErrorContainerDark,
-    onErrorContainer = OnErrorContainerDark,
-    outline = OutlineDark,
-)
-
-val LightColorScheme = lightColorScheme(
-    primary = GreenPrimaryLight,
-    secondary = GreenSecondaryLight,
-    tertiary = GreenTertiaryLight,
-    onPrimary = OnGreenLight,
-    primaryContainer = GreenContainerLight,
-    onPrimaryContainer = OnGreenContainerLight,
-    onSecondary = OnGreenSecondaryLight,
-    secondaryContainer = GreenSecondaryContainerLight,
-    onSecondaryContainer = OnGreenSecondaryContainerLight,
-    onTertiary = OnGreenTertiaryLight,
-    onTertiaryContainer = OnGreenTertiaryContainerLight,
-    tertiaryContainer = GreenTertiaryContainerLight,
-    background = BackgroundLight,
-    onBackground = OnBackgroundLight,
-    surface = SurfaceLight,
-    onSurface = OnSurfaceLight,
-    surfaceVariant = SurfaceVariantLight,
-    onSurfaceVariant = OnSurfaceVariantLight,
-    error = ErrorLight,
-    onError = OnErrorLight,
-    errorContainer = ErrorContainerLight,
-    onErrorContainer = OnErrorContainerLight,
-    outline = OutlineLight,
+// Set of Material typography styles to start with
+val Typography = Typography(
+    bodyLarge = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
+    )
+    /* Other default text styles to override
+    titleLarge = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 22.sp,
+        lineHeight = 28.sp,
+        letterSpacing = 0.sp
+    ),
+    labelSmall = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = 11.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.5.sp
+    )
+    */
 )
