@@ -9,7 +9,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class ContactListViewModel : ViewModel() {
-    private val _state = MutableStateFlow(ContactListState())
+    private val _state = MutableStateFlow(ContactListState(
+        contacts = contacts
+    ))
     val state = _state.asStateFlow()
 
     var newContact: Contact? by mutableStateOf(null)
