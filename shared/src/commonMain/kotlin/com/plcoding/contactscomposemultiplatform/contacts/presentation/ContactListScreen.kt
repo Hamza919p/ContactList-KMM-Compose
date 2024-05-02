@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.plcoding.contactscomposemultiplatform.contacts.domain.Contact
 import com.plcoding.contactscomposemultiplatform.contacts.presentation.components.ContactListItem
+import com.plcoding.contactscomposemultiplatform.database.ContactDatabase
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +31,6 @@ fun ContactListScreen(
     newContact: Contact?,
     onEvent: (ContactListEvent) -> Unit
 ) {
-
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
