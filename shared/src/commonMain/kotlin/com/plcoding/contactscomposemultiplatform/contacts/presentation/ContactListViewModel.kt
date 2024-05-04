@@ -102,10 +102,26 @@ class ContactListViewModel(
 
             }
             ContactListEvent.OnAddPhotoClicked -> TODO()
-            is ContactListEvent.OnEmailChanged -> TODO()
-            is ContactListEvent.OnFirstNameChanged -> TODO()
-            is ContactListEvent.OnLastNameChanged -> TODO()
-            is ContactListEvent.OnPhoneNumberChanged -> TODO()
+            is ContactListEvent.OnEmailChanged -> {
+                newContact = newContact?.copy(
+                    email = event.value
+                )
+            }
+            is ContactListEvent.OnFirstNameChanged -> {
+                newContact = newContact?.copy(
+                    firstName = event.value
+                )
+            }
+            is ContactListEvent.OnLastNameChanged -> {
+                newContact = newContact?.copy(
+                    lastName = event.value
+                )
+            }
+            is ContactListEvent.OnPhoneNumberChanged -> {
+                newContact = newContact?.copy(
+                    phoneNumber = event.value
+                )
+            }
             is ContactListEvent.OnPhotoPicked -> TODO()
             ContactListEvent.SaveContact -> TODO()
             is ContactListEvent.SelectContact -> TODO()
