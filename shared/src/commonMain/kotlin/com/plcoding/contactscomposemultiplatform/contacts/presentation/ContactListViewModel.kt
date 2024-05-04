@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.plcoding.contactscomposemultiplatform.contacts.domain.Contact
 import com.plcoding.contactscomposemultiplatform.contacts.domain.ContactDataSource
+import com.plcoding.contactscomposemultiplatform.contacts.domain.ContactListValidator
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -101,7 +102,7 @@ class ContactListViewModel(
                 )
 
             }
-            ContactListEvent.OnAddPhotoClicked -> TODO()
+            ContactListEvent.OnAddPhotoClicked -> {}
             is ContactListEvent.OnEmailChanged -> {
                 newContact = newContact?.copy(
                     email = event.value
@@ -122,9 +123,59 @@ class ContactListViewModel(
                     phoneNumber = event.value
                 )
             }
-            is ContactListEvent.OnPhotoPicked -> TODO()
-            ContactListEvent.SaveContact -> TODO()
-            is ContactListEvent.SelectContact -> TODO()
+            is ContactListEvent.OnPhotoPicked -> {
+                newContact = newContact?.copy(
+                    photoBytes = event.bytes
+                )
+            }
+            ContactListEvent.SaveContact -> {
+                newContact?.let {
+                    val result = ContactListValidator.validate(it)
+
+                    val errors = listOfNotNull(
+                        result.firstNameError,
+                        result.lastNameError,
+                        result.emailError,
+                        result.phoneNumberError
+                    )
+
+                    if(errors.isEmpty()) {
+                        _state.update {
+                            it.copy(
+                                isAddContactSheetOpen = false,
+                                firstNameError = null,
+                                lastNameError = null,
+                                emailError = null,
+                                phoneNumberError = null
+                            )
+                        }
+
+                        viewModelScope.launch {
+                            contactDataSource.insertContact(it)
+                            delay(300L)
+                            newContact = null
+                        }
+
+                    } else {
+                        _state.update {
+                            it.copy(
+                                firstNameError = result.firstNameError,
+                                lastNameError = result.lastNameError,
+                                emailError = result.emailError,
+                                phoneNumberError = result.phoneNumberError
+                            )
+                        }
+                    }
+                }
+            }
+            is ContactListEvent.SelectContact -> {
+                _state.update {
+                    it.copy(
+                        selectedContact = event.contact,
+                        isSelectedContactSheetOpen = true
+                    )
+                }
+            }
         }
     }
 }
