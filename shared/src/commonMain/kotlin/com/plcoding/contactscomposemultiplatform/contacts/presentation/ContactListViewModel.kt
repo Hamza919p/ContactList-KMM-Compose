@@ -6,11 +6,14 @@ import androidx.compose.runtime.setValue
 import com.plcoding.contactscomposemultiplatform.contacts.domain.Contact
 import com.plcoding.contactscomposemultiplatform.contacts.domain.ContactDataSource
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class ContactListViewModel(
     private val contactDataSource: ContactDataSource
@@ -34,7 +37,22 @@ class ContactListViewModel(
 
     fun onEvent(event: ContactListEvent) {
         when (event) {
-            ContactListEvent.DeleteContact -> TODO()
+            ContactListEvent.DeleteContact -> {
+                viewModelScope.launch {
+                    _state.value.selectedContact?.id?.let { id ->
+                        _state.update {
+                            it.copy(
+                                isSelectedContactSheetOpen = false
+                            )
+                        }
+                        contactDataSource.deleteContact(id)
+                        delay(300L)
+                        _state.update {
+                            it.copy(selectedContact = null)
+                        }
+                    }
+                }
+            }
             ContactListEvent.DismissContact -> TODO()
             is ContactListEvent.EditContact -> TODO()
             ContactListEvent.OnAddNewContactClick -> TODO()
