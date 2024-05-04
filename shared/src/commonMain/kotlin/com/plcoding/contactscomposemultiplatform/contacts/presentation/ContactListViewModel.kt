@@ -74,8 +74,19 @@ class ContactListViewModel(
                     }
                 }
             }
-            is ContactListEvent.EditContact -> TODO()
-            ContactListEvent.OnAddNewContactClick -> TODO()
+            is ContactListEvent.EditContact -> {
+                _state.update {
+                    it.copy(
+                        selectedContact = null,
+                        isAddContactSheetOpen = true,
+                        isSelectedContactSheetOpen = false
+                    )
+                }
+                newContact = event.contact
+            }
+            ContactListEvent.OnAddNewContactClick -> {
+
+            }
             ContactListEvent.OnAddPhotoClicked -> TODO()
             is ContactListEvent.OnEmailChanged -> TODO()
             is ContactListEvent.OnFirstNameChanged -> TODO()
