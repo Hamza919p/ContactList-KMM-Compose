@@ -53,7 +53,27 @@ class ContactListViewModel(
                     }
                 }
             }
-            ContactListEvent.DismissContact -> TODO()
+            ContactListEvent.DismissContact -> {
+                viewModelScope.launch {
+                    _state.update {
+                        it.copy(
+                            isSelectedContactSheetOpen = false,
+                            isAddContactSheetOpen = false,
+                            firstNameError = null,
+                            lastNameError = null,
+                            emailError = null,
+                            phoneNumberError = null
+                        )
+                    }
+                    delay(300L)
+                    newContact = null
+                    _state.update {
+                        it.copy(
+                            selectedContact = null
+                        )
+                    }
+                }
+            }
             is ContactListEvent.EditContact -> TODO()
             ContactListEvent.OnAddNewContactClick -> TODO()
             ContactListEvent.OnAddPhotoClicked -> TODO()
