@@ -85,6 +85,20 @@ class ContactListViewModel(
                 newContact = event.contact
             }
             ContactListEvent.OnAddNewContactClick -> {
+                _state.update {
+                    it.copy(
+                        isAddContactSheetOpen = true
+                    )
+                }
+
+                newContact = Contact(
+                    id = null,
+                    firstName = "",
+                    lastName = "",
+                    email = "",
+                    phoneNumber = "",
+                    photoBytes = null
+                )
 
             }
             ContactListEvent.OnAddPhotoClicked -> TODO()
