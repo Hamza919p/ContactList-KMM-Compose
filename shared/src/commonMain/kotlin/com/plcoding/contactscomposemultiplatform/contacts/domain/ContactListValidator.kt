@@ -9,13 +9,13 @@ object ContactListValidator {
             result = result.copy(firstNameError = "First name cannot be blank")
         }
         if(contact.lastName.isBlank()) {
-            result = result.copy(firstNameError = "Last name cannot be blank")
+            result = result.copy(lastNameError = "Last name cannot be blank")
         }
         if(contact.email.isBlank()) {
-            result = result.copy(firstNameError = "Email cannot be blank")
+            result = result.copy(emailError = "Email cannot be blank")
         }
         if(contact.phoneNumber.isBlank()) {
-            result = result.copy(firstNameError = "Phone Number cannot be blank")
+            result = result.copy(phoneNumberError = "Phone Number cannot be blank")
         }
         return result
 
