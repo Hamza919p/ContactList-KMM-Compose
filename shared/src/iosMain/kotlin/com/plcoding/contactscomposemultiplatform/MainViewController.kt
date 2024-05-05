@@ -1,6 +1,7 @@
 package com.plcoding.contactscomposemultiplatform
 
 import androidx.compose.ui.window.ComposeUIViewController
+import com.plcoding.contactscomposemultiplatform.di.AppModule
 import platform.UIKit.UIScreen
 import platform.UIKit.UIUserInterfaceStyle
 
@@ -11,6 +12,7 @@ fun MainViewController() = ComposeUIViewController {
 
     App(
         darkTheme = isDark,
-        dynamicColors = false
+        dynamicColors = false,
+        appModule = AppModule()
     )
 }
